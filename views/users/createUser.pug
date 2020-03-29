@@ -2,6 +2,10 @@ extends ../layouts/default.pug
 
 block content
     .container
+        if errors
+            each item in errors
+                .alert.alert-danger= item
+                
         form(action="/users/create" method="post")
             .form-group
                 label Họ Tên
