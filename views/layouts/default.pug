@@ -1,0 +1,19 @@
+html
+    head
+        title Bai 2
+    body
+        header
+            nav.navbar.navbar-expand-lg.navbar-light.bg-light
+                .container
+                    a.navbar-brand(href='#') Navbar
+                    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+                        span.navbar-toggler-icon
+                    #navbarSupportedContent.collapse.navbar-collapse
+                        ul.navbar-nav.mr-auto
+                            li.nav-item.active
+                                a.nav-link(href='/users') Home
+                            li.nav-item
+                                a.nav-link(href='/users/login') Login
+
+        main
+            block content

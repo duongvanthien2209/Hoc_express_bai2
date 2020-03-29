@@ -1,0 +1,12 @@
+extends ../layouts/default.pug
+
+block content
+    .container
+        form(action="/users/login" method="post")
+            .form-group
+                label Tên đăng nhập
+                input.form-control(type="text" name="name" placeholder="Nhập tên đăng nhập")
+            .form-group
+                label Mật khẩu
+                input.form-control(type="passowrd" name="password" placeholder="Nhập password của bạn")
+            input.btn.btn-outline-success(type="submit" value="Đăng nhập")
