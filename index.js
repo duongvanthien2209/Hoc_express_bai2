@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 const db = require('./db');
 db.defaults({ users: [] }).write();
 
+// Set up static file
+app.use(express.static('public'));
+
 // Khoi tao template engine
 app.set('views', './views');
 app.set('view engine', 'pug');
