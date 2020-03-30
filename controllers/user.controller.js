@@ -28,12 +28,19 @@ module.exports.postCreate = (req, res) => {
         errors.push('Bạn chưa nhập mật khẩu');
     }
 
+    if(!req.file) {
+        errors.push('Bạn chưa upload file');
+    }
+
     if (errors.length) {
         res.render('users/createUser', { errors });
         return;
     }
 
-    db.get('users').push({ password: md5(req.body.password), id: shortid.generate(), name: req.body.name, username: req.body.username, avatar: req.body.avatar }).write();
+    let paths = req.file.path.split('\\');
+    let path = paths[1].concat('/',paths[2]);
+
+    db.get('users').push({ password: md5(req.body.password), id: shortid.generate(), name: req.body.name, username: req.body.username, avatar: path }).write();
     res.redirect('/users');
 }
 

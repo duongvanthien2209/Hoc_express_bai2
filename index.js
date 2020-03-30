@@ -1,5 +1,6 @@
 require('dotenv').config(); // Khai bao enviroment variable
 
+// Khoi tao co ban express
 const express = require('express');
 const app = express();
 const port = 5000;
@@ -12,6 +13,10 @@ app.use(cookieParser(process.env.COOKIE_SIGNED));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+// Doc du lieu tu form nhung co chua file upload
+const multer = require('multer');
+const upload = multer({dest: './public/upload'});
 
 // Khoi tao database
 const db = require('./db');
@@ -32,7 +37,7 @@ const userController = require('./controllers/user.controller');
 
 // Create
 app.get('/users/create', userController.getCreate);
-app.post('/users/create', userController.postCreate);
+app.post('/users/create', upload.single('avatar'), userController.postCreate);
 
 // Login
 app.get('/users/login', userController.getLogin);
