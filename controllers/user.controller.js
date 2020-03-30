@@ -1,5 +1,6 @@
 const shortid = require('shortid'); // Tao chuoi ngau nhien ==> dung de tao id 
 const md5 = require('md5'); // Ma hoa mat khau
+const db = require('../db');
 
 // Get all
 module.exports.getAll = (req,res) => {
@@ -32,7 +33,7 @@ module.exports.postCreate = (req, res) => {
         return;
     }
 
-    db.get('users').push({ ...req.body, id: shortid.generate() });
+    db.get('users').push({ password: md5(req.body.password), id: shortid.generate(), name: req.body.name, username: req.body.username, avatar: req.body.avatar }).write();
     res.redirect('/users');
 }
 
@@ -71,6 +72,6 @@ module.exports.postLogin = (req, res) => {
         return;
     }
 
-    res.cookie('userid', user.id);
+    res.cookie('userid', user.id, { signed: true });
     res.redirect('/users');
 }

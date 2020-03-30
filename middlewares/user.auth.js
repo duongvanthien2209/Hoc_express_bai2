@@ -1,13 +1,13 @@
 const db = require('../db');
 
 module.exports.login = (req,res,next) => {
-    if(!req.cookie.userid)
+    if(!req.signedCookies.userid)
     {
-        res.redirect('/user/login');
+        res.redirect('/users/login');
         return;
     }
 
-    let user = db.get('users').find({ id: req.cookie.userid }).value();
+    let user = db.get('users').find({ id: req.signedCookies.userid }).value();
 
     if(!user)
     {

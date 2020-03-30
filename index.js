@@ -1,10 +1,12 @@
+require('dotenv').config(); // Khai bao enviroment variable
+
 const express = require('express');
 const app = express();
 const port = 5000;
 
 // Doc du lieu tu cookie
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SIGNED));
 
 // Doc du lieu tu form goi len
 const bodyParser = require('body-parser');
@@ -26,8 +28,8 @@ const userMiddleware = require('./middlewares/user.auth');
 const userController = require('./controllers/user.controller');
 
 // Create
-app.get('/create', userController.getCreate);
-app.post('/create', userController.postCreate);
+app.get('/users/create', userController.getCreate);
+app.post('/users/create', userController.postCreate);
 
 // Login
 app.get('/users/login', userController.getLogin);
